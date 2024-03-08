@@ -7,13 +7,16 @@ export var workExperiences =
             title: 'Technical Lead',
             role: ['Lead', 'Developer'],
             company: 'BouncyBrain',
-            project: '<a class=\'text-inherit\' href=\'https://www.bouncybraingames.com/\'>FullSteam: Fluffy X Machina</a>',
+            project: '<a class=\'text-inherit\' href=\'https://www.bouncybraingames.com/projects/\'>FullSteam: Fluffy X Machina</a>',
             startDate: new Date('13/Dec/23'),
+            achievements: [
+                'Led the technical development of the BouncyBrain game MVP, preparing the company’s first round of investment.',
+            ],
             tasks: [
-                'Led the definition and implementation of the technical strategy for Bouncy Brain, establishing coding workflows, versioning practices, and toolchains.',
-                'Designed and programmed the BouncyBrain game MVP using Unity and C#, ensuring a high-quality and engaging gaming experience.',
+                'Lead the definition and implementation of the technical strategy for Bouncy Brain, establishing coding workflows, versioning practices, and toolchains.',
+                'Design and program the BouncyBrain game MVP using Unity and C#, ensuring a high-quality and engaging gaming experience.',
                 'Oversaw comprehensive code review processes, ensuring the highest quality standards and fostering a collaborative development environment.',
-                'Provided strategic leadership in business development and IT strategy, aligning technical initiatives with the company’s overall goals.',
+                'Provide strategic leadership in business development and IT strategy, aligning technical initiatives with the company’s overall goals.',
             ],
             skills: [
                 {label: 'Unity', value: 90},
@@ -24,7 +27,6 @@ export var workExperiences =
                 {label: 'Team Lead', value: 20},
                 {label: 'Blender', value: 1},
             ],
-            // image: 'bb.webp',
             industry: 'gaming',
         },
         {
@@ -33,12 +35,18 @@ export var workExperiences =
             project: '<a class=\'text-inherit\' href=\'https://startrekfleetcommand.com/\'>Star Trek Fleet Command</a>',
             startDate: new Date('01/Jul/22'),
             endDate: new Date('12/Dec/23'),
+            achievements: [
+                'Infrastructure cost reduction up to 30%.',
+                'Redislabs cost reduction by 20%.',
+                'Dev environments hardening adding Twingate & Okta SSO',
+                'Jenkins 1.0 to Jenkins 2.0 migration.',
+            ],
             tasks: [
-                'Design and implement infrastructure using Terraform for new applications in AWS, such as ECS (Fargate, EC2), Lambda, DynamoDB, etc.',
-                'Optimize current infrastructure for improved performance, scalability, and cost-efficiency, using a data-driven approach based off metrics from DataDog, Cloudwatch & Kibana.',
-                'Advise cross-functional teams on AWS services and best practices.',
+                'Designed and implement infrastructure using Terraform for new applications in AWS, such as ECS (Fargate, EC2), Lambda, DynamoDB, etc.',
+                'Optimized current infrastructure for improved performance, scalability, and cost-efficiency, using a data-driven approach based off metrics from DataDog, Cloudwatch & Kibana.',
+                'Advises cross-functional teams on AWS services and best practices.',
                 'Docker image creation and publishing, implementing CI/CD processes using Jenkins and GitLab CI, and developing Python scripts for AWS Lambda functions.',
-                'Establish robust monitoring using DataDog and Kibana, enabling early issue detection & streamlined support processes.'
+                'Established robust monitoring using DataDog and Kibana, enabling early issue detection & streamlined support processes.'
             ],
 
             skills: [
@@ -51,16 +59,15 @@ export var workExperiences =
                 {label: 'Docker', value: 100},
                 {label: 'Linux', value: 50},
                 {label: 'Gitlab CI', value: 100},
-               
                 {label: 'Unity', value: 0},
                 {label: 'Bash', value: 100},
                 {label: 'Git', value: 100},
                 {label: 'Nginx', value: 0},
+                {label: 'Redis', value: 100},
 
             ],
             // image: 'st.webp',
             industry: 'gaming',
-            breakPageAfter: true
         },
         {
             title: 'Senior Software Engineer',
@@ -96,16 +103,19 @@ export var workExperiences =
                 {label: 'Cucumber', value: 100},
                 {label: 'Git', value: 100},
                 {label: 'Nginx', value: 50},
-               
+                {label: 'TypeScript', value: 100},
+
 
             ],
             // image: 'ts4.webp',
             industry: 'gaming',
+            breakPageAfter: true
 
         },
         {
             title: 'Lead Full Stack Developer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'Blue Ocean Sustainability',
             project: '<a class=\'text-inherit\' href=\'https://truecarbonscore.com\'>Truecarbon Score</a>',
             startDate: new Date('Fri Aug 01 2020 00:00:00 GMT+0000'),
             endDate: new Date('Fri May 01 2021 00:00:00 GMT+0000'),
@@ -132,14 +142,15 @@ export var workExperiences =
                 {label: 'Bash', value: 10},
                 {label: 'Tailwind', value: 100},
                 {label: 'Git', value: 100},
+                {label: 'TypeScript', value: 100},
                
             ],
             industry: 'building',
-            breakPageAfter: true
         },
         {
             title: 'Full Stack Developer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'Alfatec',
             project: '<a class=\'text-inherit\' href=\'https://www.sinasuite.com.com\'>SINA HIS (Hospital Information System)</a>',
             startDate: new Date('Sat Feb 01 2020 00:00:00 GMT+0000'),
             endDate: new Date('Sun Aug 01 2020 00:00:00 GMT+0000'),
@@ -155,13 +166,15 @@ export var workExperiences =
                 {label: 'JBoss', value: 50},
                 {label: 'TDD', value: 30},
                 {label: 'Git', value: 100},
+                {label: 'TypeScript', value: 100},
             ],
             industry: 'health',
 
         },
         {
             title: 'Lead Software Engineer',
-            company: 'Bitheater Ltd',
+            finalClient: 'Indra',
+            company: 'Bitheater Ltd (Own company)',
             startDate: new Date('Mon Jan 01 2018 00:00:00 GMT+0000'),
             endDate: new Date('Sat Feb 01 2020 00:00:00 GMT+0000'),
             tasks: [
@@ -184,22 +197,28 @@ export var workExperiences =
                 {label: 'Team Management', value: 50},
                 {label: 'Team Lead', value: 50},
                 {label: 'Git', value: 100},
+                {label: '.NET', value: 100},
             ],
             industry: 'public infrastructure',
 
         },
         {
             title: 'Lead Software Engineer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'JTI',
             startDate: new Date('Thu Jun 01 2017 00:00:00 GMT+0000'),
             endDate: new Date('Sun Jan 01 2018 00:00:00 GMT+0000'),
             tasks: [
-                'Led IoT device prototyping using Python on Raspberry Pi.',
+                'Led IoT device prototyping using Python on Raspberry Pi, and C on nRF51 SoC',
+                'nrf51 firmware maintenance and upgrading',
                 'Implemented given IoT business logic on Python\'s Raspberry Pi, facilitating quick testing, modification, and addition of new features.',
                 'Conducted comprehensive testing of NFC, 6LowPan, GSM, and TCP/IP for hotspot internet access to evaluate the most effective method of sending information to the internet.',
-                'As a result, filed a set of patent requests to protect the potential use of the mechanisms developed for data exchange.(link in awards section',
+                'As a result, filed a set of patent requests to protect the potential use of the mechanisms developed for data exchange.(link in Certifications section)',
             ],
             skills: [
+                {label: 'firmware', value: 100},
+                {label: 'SoC', value: 100},
+                {label: 'C', value: 100},
                 {label: 'Python', value: 100},
                 {label: 'Flask', value: 100},
                 {label: 'NFC', value: 50},
@@ -210,17 +229,20 @@ export var workExperiences =
                 {label: 'Express.js', value: 50},
                 {label: 'Node.js', value: 50},
                 {label: 'JavaScript', value: 50},
-                {label: 'Bluetooth', value: 100},
+                {label: 'BLE', value: 100},
                 {label: 'Team Lead', value: 100},
                 {label: 'Git', value: 100},
-                {label: 'Nginx', value: 50},
+                {label: 'iOS', value: 50},
+                {label: 'PWA', value: 50},
+                {label: 'JavaScript', value: 50},
+                {label: 'Webbluetooth', value: 50},
             ],
             industry: 'ecommerce',
-            breakPageAfter: true
         },
         {
             title: 'Lead DevOps Engineer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'JTI',
             startDate: new Date('Wed Feb 01 2015 00:00:00 GMT+0000'),
             endDate: new Date('Sat Jun 01 2017 00:00:00 GMT+0000'),
             tasks: [
@@ -246,13 +268,16 @@ export var workExperiences =
                 {label: 'Wordpress', value: 50},
                 {label: 'Git', value: 100},
                 {label: 'Apache', value: 50},
+                {label: 'Powershell', value: 50},
 
             ],
             industry: 'ecommerce',
+            breakPageAfter: true
         },
         {
             title: 'Cloud Engineer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'JTI',
             startDate: new Date('Wed Aug 01 2014 00:00:00 GMT+0000'),
             endDate: new Date('Sat Feb 01 2015 00:00:00 GMT+0000'),
             tasks: [
@@ -278,7 +303,8 @@ export var workExperiences =
         },
         {
             title: 'Full Stack Developer',
-            company: 'Bitheater Ltd',
+            company: 'Bitheater Ltd (Own company)',
+            finalClient: 'Rocket Internet GMbH',
             project: '<a class=\'text-inherit\' href=\'https://es.wikipedia.org/wiki/Lendico\'>Lendico</a>',
             startDate: new Date('Sun Dec 01 2013 00:00:00 GMT+0000'),
             endDate: new Date('Thu May 01 2014 00:00:00 GMT+0000'),
@@ -320,8 +346,6 @@ export var workExperiences =
                 {label: 'SourceSafe', value: 100},
             ],
             industry: 'telecommunications',
-            breakPageAfter: true
-
         },
         {
             title: 'Lead Full Stack Developer',
@@ -334,10 +358,12 @@ export var workExperiences =
                 'Created a web platform enabling Movistar customers to access exclusive offers and coupons.',
                 'Developed a REST service as the foundation for future mobile app development.',
                 'Led Android applications development for seamless user access to exclusive offers.',
-                'Contributed to web development using PHP/Symfony, REST Web services, and SSO (SAML) login systems.',
+                'Contributed to web development using PHP/Symfony, REST Web services, and SSO (SAML) identity provider.',
+                'SSO SDK development for seamless integration with Movistar\'s SSO (SAML) identity provider.',
                 'Implemented high-availability systems to ensure continuous service availability for users.'
             ],
             skills: [
+                {label: 'SDK Development', value: 100},
                 {label: 'Symfony', value: 100},
                 {label: 'JQuery', value: 50},
                 {label: 'JavaScript', value: 50},
@@ -349,6 +375,7 @@ export var workExperiences =
                 {label: 'AWS', value: 1},
                 {label: 'Team Lead', value: 50},
                 {label: 'Git', value: 100},
+
             ],
             industry: 'telecommunications',
         },
@@ -365,6 +392,7 @@ export var workExperiences =
                 {label: 'Git', value: 100},
             ],
             industry: 'learning',
+            breakPageAfter: true
         },
         {
             title: 'Senior Software Engineer',
@@ -385,9 +413,11 @@ export var workExperiences =
                 {label: 'ROS', value: 50},
                 {label: 'CMake', value: 50},
                 {label: 'Git', value: 100},
-
+                {label: 'ML', value: 50},
+                {label: 'Neural Networks', value: 50},
             ],
             industry: 'robotics',
+            breakPageAfter: true
         },
         {
             title: 'Senior Software Engineer',
@@ -406,10 +436,10 @@ export var workExperiences =
                 {label: 'OpenCV', value: 100},
                 {label: 'Java', value: 100},
                 {label: 'Git', value: 100},
+                {label: 'C++', value: 100},
 
             ],
             industry: 'health',
-            breakPageAfter: true
 
         },
         {
@@ -450,12 +480,13 @@ export var workExperiences =
                 'Developed enterprise web portals using PHP and the CodeIgniter development framework, showcasing expertise in Linux, Apache, MySQL, and PHP.'
             ],
             skills: [
+                {label: 'SDK development', value: 100},
                 {label: 'Linux', value: 50},
                 {label: 'Apache', value: 10},
                 {label: 'MySQL', value: 50},
                 {label: 'PHP', value: 100},
                 {label: 'CodeIgniter', value: 100},
-                {label: 'Type3', value: 100},
+                {label: 'Typo3', value: 100},
                 {label: 'CSS', value: 50},
                 {label: 'HTML', value: 50},
                 {label: 'JavaScript', value: 50},
@@ -463,6 +494,7 @@ export var workExperiences =
                 {label: 'Git', value: 100},
             ],
             industry: 'learning',
+            
 
         },
         {
@@ -471,6 +503,7 @@ export var workExperiences =
             startDate: new Date('Tue Mar 01 2008 00:00:00 GMT+0000'),
             endDate: new Date('Fri Feb 01 2009 00:00:00 GMT+0000'),
             tasks: [
+                'Improvement and maintenance of the company\'s CMS SDK',
                 'Conducted PHP web development, creating dynamic and interactive websites.',
                 'Developed CMS solutions based on MYSQL, LINUX, and PHP5, emphasizing skills in eCommerce and MVC architecture.',
                 'Utilized Object-Oriented Programming (OOP) principles for efficient and modular code development.',
@@ -480,6 +513,7 @@ export var workExperiences =
                 'Administered Linux servers for seamless operation, specifically CentOS Linux.'
             ],
             skills: [
+                {label: 'SDK development', value: 100},
                 {label: 'Linux', value: 70},
                 {label: 'Apache', value: 70},
                 {label: 'MySQL', value: 50},
@@ -490,8 +524,6 @@ export var workExperiences =
                 {label: 'Subversion', value: 100},
             ],
             industry: 'ecommerce',
-            breakPageAfter: true
-
         },
         {
             title: 'Full Stack Developer',
@@ -526,6 +558,7 @@ export var workExperiences =
                 {label: 'Subversion', value: 100},
             ],
             industry: 'aeronautics',
+            breakPageAfter: true
         },
         {
             title: 'Systems Administrator',
@@ -551,6 +584,7 @@ export var workExperiences =
                 {label: 'Bash', value: 30},
             ],
             industry: 'aeronautics',
+
         },
         {
             title: 'Freelance Teacher',
@@ -566,7 +600,6 @@ export var workExperiences =
             skills: [
                 {label: 'Linux', value: 100},
                 {label: 'Bash', value: 100},
-                {label: 'Linux', value: 100},
                 {label: 'C/C++', value: 100},
                 {label: 'Java', value: 100},
             ],

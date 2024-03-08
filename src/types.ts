@@ -10,8 +10,11 @@ export interface ExperienceType {
     startDate: Date;
     endDate?: Date;
     company: string;
+    finalClient?: string;
+    highlight?: boolean;
     skills: Array<SkillType>;
     tasks: Array<string>;
+    achievements: Array<string>;
     image?: string;
     breakPageAfter?: boolean;
     industry?: 'gaming' | 'building' | 'health' | 'public infrastructure' | 'ecommerce' | 'telecommunications' | 'robotics' | 'learning' | 'aeronautics'

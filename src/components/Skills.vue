@@ -59,7 +59,7 @@ function getNormalizedWeightClass(weight: number) {
 }
 
 function getAbsoluteWeightClass(weight: number) {
-  let modeClass = 'rounded-t-sm text-md'
+  let modeClass = 'rounded-t-sm'
 
   if ((weight * maxWeight) / 365 >= 7) return `pb-10 ${modeClass}`
   if ((weight * maxWeight) / 365 >= 5) return `pb-7 ${modeClass}`

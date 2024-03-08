@@ -1,3 +1,28 @@
+# Project kick off
+Requires Node.JS/NVM
+
+## Install project dependencies
+```
+npm install
+```
+
+## Run the project for development
+```
+npm run dev
+```
+
+## Build for production
+```
+npm run buld
+```
+
+## Build & Deploy through ssh
+Requieres ssh access through public key on the destination server
+```
+./deploy.sh [user]@domain.com /destination/path/on/the/remote/server
+```
+
+
 # Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.

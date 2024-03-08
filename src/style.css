@@ -135,3 +135,7 @@ section {
     }
 }
 
+.awards > ul > li {
+    @apply mb-4
+}
+

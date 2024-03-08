@@ -31,7 +31,7 @@ groupExperiences(props.experiences)
 <template>
     <div class="flex">
       <div class="space-y-6 border-l-2 border-dashed w-full">
-        <Experience v-for="experience in experiences" :experience="experience"/>
+        <Experience v-for="experience in experiences.filter((exp) => !exp.highlight)" :experience="experience"/>
       </div>
     </div>
 
