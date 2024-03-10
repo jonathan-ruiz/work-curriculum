@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {
+ KeyIcon
+} from '@heroicons/vue/24/solid';
 export interface Props {
   themeClass?: string,
 }
@@ -26,6 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
       <div class="mt-32 text-center">
         <h1>Jonathan Ruiz</h1>
         <h2>Software Engineer</h2>
+        <a href="/id_rsa.pub" class="text-inherit"><KeyIcon class="w-3 inline-block"/>Public Key</a>
         <div class="w-full text-center">
           <div class="flex justify-center pt-8 pb-0 lg:pt-4">
             <div class="flex space-x-2">

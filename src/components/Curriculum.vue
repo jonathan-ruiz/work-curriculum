@@ -6,7 +6,6 @@ import {
   CloudIcon,
   DocumentMagnifyingGlassIcon,
   IdentificationIcon
-
 } from '@heroicons/vue/24/solid';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import ExperienceList from "./ExperienceList.vue";
