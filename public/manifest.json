@@ -1,0 +1,57 @@
+{
+  "name": "Your Name",
+  "short_name": "Your Name",
+  "description": "Personal Web Page with Work Experience Summary",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3498db",
+  "icons": [
+    {
+      "src": "apple-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "manifest_version": 2,
+  "work_experience": [
+    {
+      "title": "Senior DevOps Engineer",
+      "company": "Scopely",
+      "startDate": "July 2022",
+      "endDate": "Present",
+      "project": "Star Trek Fleet Command",
+      "image": "cover-photo.webp"
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Dovetailgames",
+      "startDate": "May 2021",
+      "endDate": "July 2022",
+      "project": "Train Sim World 4",
+      "image": "Dovetail-Train-Sim-World-4.jpg"
+    },
+    {
+      "title": "Lead Full Stack Developer",
+      "company": "Bitheater Ltd",
+      "startDate": "August 2020",
+      "endDate": "May 2021",
+      "project": "Truecarbon Score",
+      "image": "FTZD7EEe_400x400.png"
+    },
+    {
+      "title": "Lead Full Stack Developer",
+      "company": "Bitheater Ltd",
+      "startDate": "August 2020",
+      "endDate": "May 2021",
+      "project": "Truecarbon Score"
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Bitheater Ltd",
+      "project": "<a class='text-inherit' href='https://www.sinasuite.com.com'>SINA HIS (Hospital Information System)</a>",
+      "startDate": "Sat Feb 01 2020 00:00:00 GMT+0000",
+      "endDate": "Sun Aug 01 2020 00:00:00 GMT+0000"
+    }
+  ]
+}

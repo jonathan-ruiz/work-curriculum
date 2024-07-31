@@ -1,2 +1,23 @@
-# work-curriculum
-Dynamic CV Generator: Vite, Vue, and Tailwind-powered project enabling real-time styling adjustments for an online CV, with the added feature of generating a printable version.
+# Project kick off
+Requires Node.JS/NVM
+
+## Install project dependencies
+```
+npm install
+```
+
+## Run the project for development
+```
+npm run dev
+```
+
+## Build for production
+```
+npm run buld
+```
+
+## Build & Deploy through ssh
+Requieres ssh access through public key on the destination server
+```
+./deploy.sh [user]@domain.com /destination/path/on/the/remote/server
+```
