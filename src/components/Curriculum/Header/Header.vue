@@ -28,9 +28,15 @@ const attrs = useAttrs();
         <div class="mt-32 text-center">
           <h1>Jonathan Ruiz</h1>
           <h2 class="mb-1">Software Engineer</h2>
+          <div class="mb-2 text-sm">
+            <a
+
+                href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/6d618e6f-2209-4c43-b209-460509f2600c-jonathan-ruiz-peinado-dc6d596c-6611-4253-bf8d-0c6ff8536fa8-certificate.pdf">Certified
+              Kubernetes Administrator (CKA)</a> LF-ynhdss52m7
+          </div>
           <a href="jonathan_ruiz.pdf" class="print:hidden">
             <PrinterIcon class="w-4 inline-block"></PrinterIcon>
-            Printer version</a>
+            PDF</a>
 
         </div>
         <div class="pt-6 mx-1 md:mx-6 mt-6 text-left border-t">
