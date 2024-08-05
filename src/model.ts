@@ -40,7 +40,7 @@ export var workExperiences : ExperienceType[] =
             finalClient: 'BouncyBrain',
             project: '<a class=\'text-inherit\' href=\'https://www.bouncybraingames.com/projects/\'>FullSteam: Fluffy X Machina</a>',
             startDate: new Date('13/Dec/23'),
-            endDate: new Date('13/March/23'),
+            endDate: new Date('13/March/24'),
             "achievements": [
                 "Led technical development of BouncyBrain game MVP, securing initial investment."
             ],
