@@ -644,7 +644,6 @@ export var skills = {
     ],
     cloud: [
         {label: 'AWS', value: 50, color: colors[0]},
-        {label: 'AWS', value: 50, color: colors[0]},
         {label: 'Linux', value: 50, color: colors[0]},
         {label: 'Jenkins', value: 25, color: colors[1]},
         {label: 'Gitlab CI', value: 25, color: colors[1]},
