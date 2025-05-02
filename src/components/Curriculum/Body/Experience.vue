@@ -14,8 +14,7 @@ export interface Props {
   experience: ExperienceType,
 }
 
-const props = withDefaults(defineProps<Props>(), {
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 function skillFilter(skill: SkillType) {
   return skill.value > 89;
@@ -38,6 +37,7 @@ function monthDiffToString(monthsDiff: number): string {
 
   return result.trim()
 }
+
 const attrs = useAttrs();
 const showMore = ref(false)
 </script>
@@ -45,10 +45,12 @@ const showMore = ref(false)
 <template>
   <div v-bind="attrs">
     <div v-if="!experience.grouped" class="mb-2">
-      <div class="print:flex print:items-center md:flex md:items-center" :class="[experience.industry || experience.project? 'mb-0' : 'mb-4']">
+      <div class="print:flex print:items-center md:flex md:items-center"
+           :class="[experience.industry || experience.project? 'mb-0' : 'mb-4']">
         <div v-if="!experience.grouped"
              class="block md:inline text-lg dark:font-white dark:text-white text-black p-2 rounded-r-md -ml-4">
-          <span class="hidden md:inline font-bold text-2xl text-yellow-500">@</span> <span class="block md:inline">{{ experience.company }}</span>
+          <span class="hidden md:inline font-bold text-2xl text-yellow-500">@</span> <span
+            class="block md:inline">{{ experience.company }}</span>
         </div>
         <template v-if="!experience.grouped">
           <div class="hidden print:block md:block grow border-b border-black dark:border-gray-200"></div>
@@ -66,12 +68,16 @@ const showMore = ref(false)
       </div>
     </div>
     <div class="relative w-full mb-6">
-      <IndustryIcon :name="experience.industry" class="hidden print:block md:block absolute top-0 left-0 -ml-3 h-5 w-5"/>
+      <IndustryIcon :name="experience.industry"
+                    class="hidden print:block md:block absolute top-0 left-0 -ml-3 h-5 w-5"/>
 
       <div class="ml-1 print:ml-6 md:ml-6">
         <div class="flex items-center" :class="[experience.industry || experience.project? 'mb-0' : 'mb-4']">
 
-          <span class="text-xs print:text-base md:text-base bg-yellow-700 sm:bg-inherit hover:bg-yellow-500 md:hover:bg-inherit text-white sm:text-black font-bold sm:font-normal py-1 sm:py-0 px-4 sm:px-0 border sm:border-0 mb-2 md:mb-0 border-yellow-700 rounded">{{ experience.title }}</span>
+          <span
+              class="text-xs print:text-base md:text-base bg-yellow-700 sm:bg-inherit hover:bg-yellow-500 md:hover:bg-inherit text-white dark:text-white sm:text-black font-bold sm:font-normal py-1 sm:py-0 px-4 sm:px-0 border sm:border-0 mb-2 md:mb-0 border-yellow-700 rounded">{{
+              experience.title
+            }}</span>
           <span v-if="experience.finalClient" class="ml-2">@{{ experience.finalClient }}</span>
           <template v-if="!experience.grouped">
           </template>
@@ -81,26 +87,26 @@ const showMore = ref(false)
           in <span class="mb-4" v-html="experience.project"/>
         </div>
 
-          <div class="grid grid-cols-4 place-content-between overflow-hidden mb-0">
-            <ul class="list-disc ml-4 mr-2 col-span-4 text-left">
-              <li v-if="experience.achievements" v-for="achievement in experience.achievements">
-                <Highlighter
-                    highlightClassName="badge-in-text"
-                    :autoEscape="true"
-                    :textToHighlight="achievement"
-                    :searchWords="experience.skills.map(s => s.label)"
-                />
-              </li>
-              <li v-for="task in experience.tasks">
-                <Highlighter
-                    highlightClassName="badge-in-text"
-                    :autoEscape="true"
-                    :textToHighlight="task"
-                    :searchWords="experience.skills.map(s => s.label)"
-                />
-              </li>
-            </ul>
-          </div>
+        <div class="grid grid-cols-4 place-content-between overflow-hidden mb-0">
+          <ul class="list-disc ml-4 mr-2 col-span-4 text-left">
+            <li v-if="experience.achievements" v-for="achievement in experience.achievements">
+              <Highlighter
+                  highlightClassName="badge-in-text"
+                  :autoEscape="true"
+                  :textToHighlight="achievement"
+                  :searchWords="experience.skills.map(s => s.label)"
+              />
+            </li>
+            <li v-for="task in experience.tasks">
+              <Highlighter
+                  highlightClassName="badge-in-text"
+                  :autoEscape="true"
+                  :textToHighlight="task"
+                  :searchWords="experience.skills.map(s => s.label)"
+              />
+            </li>
+          </ul>
+        </div>
 
         <div class="text-justify">
           <skills
