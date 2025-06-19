@@ -4,6 +4,59 @@ import {ExperienceType, SkillType} from "./types.ts";
 export var workExperiences : ExperienceType[] =
     [
         {
+            title: 'Cloud Solutions Architect/DevOps (contractor)',
+            role: ['Lead', 'DevOps', 'Cloud', 'AI'],
+            company: 'British Airways',
+            project: '<a class=\'text-inherit\' href=\'https://www.britishairways.com\'>British Airways</a>',
+            startDate: new Date('9/Jun/25'),
+            "achievements": [
+            ],
+            "tasks": [
+                "Improve existing operational decision support tools",
+                "Datadog integration",
+                "Review and solve security issues",
+                "Cost management reduction"
+            ],
+            skills: [
+                {label: 'Terraform', value: 100},
+                {label: 'SpaceLift', value: 100},
+                {label: 'AWS', value: 100},
+                {label: 'Retool', value: 50},
+                {label: 'Git', value: 100},
+                {label: 'IT Strategy', value: 100},
+                {label: 'Team Lead', value: 100},
+
+            ],
+            industry: 'aviation'
+        },
+        {
+            title: 'DevOps/SecOps (contractor)',
+            role: ['Lead', 'DevOps', 'SecOps'],
+            company: 'Checkout.com',
+            project: '<a class=\'text-inherit\' href=\'https://checkout.com\'>Checkout.com</a>',
+            startDate: new Date('13/September/24'),
+            endDate: new Date('9/Jun/25'),
+            "achievements": [
+            ],
+            "tasks": [
+                "Enforced and improved least privilege principal",
+                "Supported third party security auditory",
+                "Developed mechanisms to monitor and alert in case of privilege policy violations",
+                "Improved IaC managing and sensitive data storage"
+            ],
+            skills: [
+                {label: 'Terraform', value: 100},
+                {label: 'SpaceLift', value: 100},
+                {label: 'AWS', value: 100},
+                {label: 'Retool', value: 50},
+                {label: 'Git', value: 100},
+                {label: 'IT Strategy', value: 100},
+                {label: 'Team Lead', value: 100},
+
+            ],
+            industry: 'finance'
+        },
+        {
             title: 'DevOps Tech Lead',
             role: ['Lead', 'DevOps'],
             company: 'Nexxyo Labs',
@@ -36,7 +89,7 @@ export var workExperiences : ExperienceType[] =
         {
             title: 'Technical Lead',
             role: ['Lead', 'Developer'],
-            company: "Bitheater Ltd (Contract)",
+            company: "Bitheater Ltd (Contracts)",
             finalClient: 'BouncyBrain',
             project: '<a class=\'text-inherit\' href=\'https://www.bouncybraingames.com/projects/\'>FullSteam: Fluffy X Machina</a>',
             startDate: new Date('13/Dec/23'),
@@ -106,7 +159,7 @@ export var workExperiences : ExperienceType[] =
         },
         {
             title: 'Senior Software Engineer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             finalClient: 'Dovetailgames',
             project: '<a class=\'text-inherit\' href=\'https://www.trainsimworld.com/?_ga=2.258825162.1532421791.1705054840-69028514.1705054840\'>Train Sim World 4</a>',
             startDate: new Date('01/May/2021'),
@@ -145,7 +198,7 @@ export var workExperiences : ExperienceType[] =
         },
         {
             title: 'Lead Full Stack Developer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             finalClient: 'Blue Ocean Sustainability',
             project: '<a class=\'text-inherit\' href=\'https://truecarbonscore.com\'>Truecarbon Score</a>',
             startDate: new Date('Fri Aug 01 2020 00:00:00 GMT+0000'),

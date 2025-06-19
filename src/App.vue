@@ -5,5 +5,5 @@ import Curriculum from './components/Curriculum/Curriculum.vue'
 
 <template>
   <Curriculum class="container m-auto text-xs"
-              :style="false ? 'width: 297mm; font-size: 18px; line-height: 1.2;' : ''"/>
+              :style="true ? 'width: 297mm; font-size: 18px; line-height: 1.2;' : ''"/>
 </template>
