@@ -16,6 +16,7 @@ export type IndustryType =
     | 'robotics'
     | 'learning'
     | 'aeronautics'
+    | 'aviation'
     | 'finance';
 
 // Describes a professional experience, project, or role

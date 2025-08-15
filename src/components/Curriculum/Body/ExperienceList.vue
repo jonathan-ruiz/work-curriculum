@@ -1,45 +1,62 @@
 <script setup lang="ts">
 import Experience from "./Experience.vue";
-import {ExperienceType} from "../../../types.ts";
-import {useAttrs} from "vue";
+import { ExperienceType } from "../../../types.ts";
+import { useAttrs, computed } from "vue";
 
-const attrs = useAttrs();
-
-
+// Define props with optional itemsClass and required experiences
 const props = defineProps<{
-  experiences: Array<ExperienceType>,
-  itemsClass?: string
+  experiences: ExperienceType[];
+  itemsClass?: string;
 }>();
 
-const groupExperiences = (experiences: Array<ExperienceType>) => {
-  let groupStartIndex: number | undefined;
+// Access additional attributes passed to this component
+const attrs = useAttrs();
 
-  experiences.forEach((experience, index) => {
-    if (experiences[index + 1] && experience.company === experiences[index + 1].company) {
-      experiences[index + 1].grouped = true;
-      if (groupStartIndex === undefined) groupStartIndex = index;
-    } else {
-      if (groupStartIndex !== undefined) {
-        experiences[groupStartIndex].startDate = experiences[index].startDate;
-      }
-      groupStartIndex = undefined;
+/**
+ * Groups experiences based on the same company.
+ * The processed list is immutable and prevents side effects.
+ */
+const groupedExperiences = computed(() => {
+  if (!props.experiences || !props.experiences.length) return [];
+
+  const experiencesCopy = [...props.experiences]; // Avoid mutating the original props
+  let activeGroupIndex: number | undefined;
+
+  experiencesCopy.forEach((experience, index) => {
+    const nextExperience = experiencesCopy[index + 1];
+
+    // Check if the next experience belongs to the same company
+    if (nextExperience && experience.company === nextExperience.company) {
+      experiencesCopy[index + 1].grouped = true; // Mark as grouped
+      if (activeGroupIndex === undefined) activeGroupIndex = index; // Store group start
+    } else if (activeGroupIndex !== undefined) {
+      // Set the startDate of the grouped experience
+      experiencesCopy[activeGroupIndex].startDate = experience.startDate;
+      activeGroupIndex = undefined; // Reset group index
     }
   });
-};
 
-groupExperiences(props.experiences);
+  return experiencesCopy;
+});
+
+/**
+ * Filters out highlighted experiences that should not appear in this list.
+ */
+const nonHighlightedExperiences = computed(() =>
+    groupedExperiences.value.filter((exp) => !exp.highlight)
+);
 </script>
 
 <template>
   <div v-bind="attrs">
     <Experience
-        class="print:border-l-2 md:border-l-2 border-dashed w-full"
-        v-for="experience in experiences.filter(exp => !exp.highlight)"
+        v-for="experience in nonHighlightedExperiences"
         :key="experience.company + experience.title"
         :experience="experience"
+        class="print:border-l-2 md:border-l-2 border-dashed w-full"
+        :class="itemsClass"
     />
   </div>
-
 </template>
 
 <style scoped>

@@ -1,12 +1,14 @@
 import tailwindConfig from "../tailwind.config.js";
 import {ExperienceType, SkillType} from "./types.ts";
+import {computed} from "vue";
+import {skillsState} from "./useSkillsState.ts";
 
 export var workExperiences : ExperienceType[] =
     [
         {
             title: 'Cloud Solutions Architect/DevOps (contractor)',
             role: ['Lead', 'DevOps', 'Cloud', 'AI'],
-            company: 'British Airways',
+            company: 'Parser Digital',
             project: '<a class=\'text-inherit\' href=\'https://www.britishairways.com\'>British Airways</a>',
             startDate: new Date('9/Jun/25'),
             "achievements": [
@@ -21,7 +23,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Terraform', value: 100},
                 {label: 'SpaceLift', value: 100},
                 {label: 'AWS', value: 100},
-                {label: 'Retool', value: 50},
+                {label: 'Retool', value: 100},
                 {label: 'Git', value: 100},
                 {label: 'IT Strategy', value: 100},
                 {label: 'Team Lead', value: 100},
@@ -32,7 +34,7 @@ export var workExperiences : ExperienceType[] =
         {
             title: 'DevOps/SecOps (contractor)',
             role: ['Lead', 'DevOps', 'SecOps'],
-            company: 'Checkout.com',
+            company: 'Parser Digital',
             project: '<a class=\'text-inherit\' href=\'https://checkout.com\'>Checkout.com</a>',
             startDate: new Date('13/September/24'),
             endDate: new Date('9/Jun/25'),
@@ -48,7 +50,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Terraform', value: 100},
                 {label: 'SpaceLift', value: 100},
                 {label: 'AWS', value: 100},
-                {label: 'Retool', value: 50},
+                {label: 'Retool', value: 100},
                 {label: 'Git', value: 100},
                 {label: 'IT Strategy', value: 100},
                 {label: 'Team Lead', value: 100},
@@ -79,10 +81,8 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Git', value: 100},
                 {label: 'IT Strategy', value: 100},
                 {label: 'Team Lead', value: 100},
-                {label: 'Unity', value: 50},
-                {label: 'Unreal', value: 50},
-                {label: 'Unreal', value: 50},
-
+                {label: 'Unity', value: 100},
+                {label: 'Unreal', value: 100},
             ],
             industry: 'gaming'
         },
@@ -115,7 +115,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Jenkins', value: 90},
             ],
             industry: 'gaming',
-            breakPageAfter: true
+            breakPageAfter: false
 
         },
         {
@@ -147,7 +147,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Docker', value: 100},
                 {label: 'Linux', value: 100},
                 {label: 'Gitlab CI', value: 100},
-                {label: 'Unity', value: 0},
+                {label: 'Unity', value: 100},
                 {label: 'Bash', value: 0},
                 {label: 'Git', value: 100},
                 {label: 'Nginx', value: 0},
@@ -155,13 +155,14 @@ export var workExperiences : ExperienceType[] =
 
             ],
             // image: 'st.webp',
-            industry: 'gaming'
+            industry: 'gaming',
+            breakPageAfter: true
         },
         {
             title: 'Senior Software Engineer',
             company: 'Bitheater Ltd (Contracts)',
             finalClient: 'Dovetailgames',
-            project: '<a class=\'text-inherit\' href=\'https://www.trainsimworld.com/?_ga=2.258825162.1532421791.1705054840-69028514.1705054840\'>Train Sim World 4</a>',
+            project: '<a class=\'text-inherit\' href=\'https://www.trainsimworld.com/?_ga=2.258825162.1532421791.17010054840-69028514.17010054840\'>Train Sim World 4</a>',
             startDate: new Date('01/May/2021'),
             endDate: new Date('01/Jul/2022'),
             "tasks": [
@@ -216,23 +217,23 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Vue.js', value: 100},
                 {label: 'TypeScript', value: 100},
                 {label: 'Bash', value: 100},
-                {label: 'Inertia', value: 50},
-                {label: 'Vite', value: 50},
+                {label: 'Inertia', value: 100},
+                {label: 'Vite', value: 100},
                 {label: 'MySQL', value: 40},
                 {label: 'Docker', value: 100},
                 {label: 'AWS', value: 100},
                 {label: 'Terraform', value: 30},
-                {label: 'Team Lead', value: 50},
+                {label: 'Team Lead', value: 100},
                 {label: 'Bash', value: 10},
                 {label: 'Tailwind', value: 100},
                 {label: 'Git', value: 100},
             ],
             industry: 'building',
-            breakPageAfter: true
+            breakPageAfter: false
         },
         {
             title: 'Full Stack Developer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             finalClient: 'Alfatec',
             project: '<a class=\'text-inherit\' href=\'https://www.sinasuite.com.com\'>SINA HIS (Hospital Information System)</a>',
             startDate: new Date('Sat Feb 01 2020 00:00:00 GMT+0000'),
@@ -258,7 +259,7 @@ export var workExperiences : ExperienceType[] =
         {
             title: 'Lead Software Engineer',
             finalClient: 'Indra',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             startDate: new Date('Mon Jan 01 2018 00:00:00 GMT+0000'),
             endDate: new Date('Sat Feb 01 2020 00:00:00 GMT+0000'),
             "tasks": [
@@ -275,7 +276,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Qt', value: 100},
                 {label: 'CMake', value: 100},
                 {label: 'Bash', value: 100},
-                {label: 'VirtualBox', value: 50},
+                {label: 'VirtualBox', value: 100},
                 {label: 'Linux', value: 100},
                 {label: 'Boost', value: 100},
                 {label: 'Team Management', value: 100},
@@ -288,7 +289,7 @@ export var workExperiences : ExperienceType[] =
         },
         {
             title: 'Lead Software Engineer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             startDate: new Date('Thu Jun 01 2017 00:00:00 GMT+0000'),
             endDate: new Date('Sun Jan 01 2018 00:00:00 GMT+0000'),
             "tasks": [
@@ -321,7 +322,7 @@ export var workExperiences : ExperienceType[] =
         },
         {
             title: 'Lead DevOps Engineer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             startDate: new Date('Wed Feb 01 2015 00:00:00 GMT+0000'),
             endDate: new Date('Sat Jun 01 2017 00:00:00 GMT+0000'),
             "tasks": [
@@ -351,11 +352,11 @@ export var workExperiences : ExperienceType[] =
 
             ],
             industry: 'ecommerce',
-            breakPageAfter: true
+            breakPageAfter: false
         },
         {
             title: 'Cloud Engineer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             startDate: new Date('Wed Aug 01 2014 00:00:00 GMT+0000'),
             endDate: new Date('Sat Feb 01 2015 00:00:00 GMT+0000'),
             "tasks": [
@@ -381,7 +382,7 @@ export var workExperiences : ExperienceType[] =
         },
         {
             title: 'Full Stack Developer',
-            company: 'Bitheater Ltd (Contract)',
+            company: 'Bitheater Ltd (Contracts)',
             finalClient: 'Rocket Internet GMbH',
             project: '<a class=\'text-inherit\' href=\'https://es.wikipedia.org/wiki/Lendico\'>Lendico</a>',
             startDate: new Date('Sun Dec 01 2013 00:00:00 GMT+0000'),
@@ -456,7 +457,7 @@ export var workExperiences : ExperienceType[] =
 
             ],
             industry: 'telecommunications',
-            breakPageAfter: true
+            breakPageAfter: false
         },
         {
             title: 'Full Stack Developer',
@@ -489,10 +490,10 @@ export var workExperiences : ExperienceType[] =
                 {label: 'C/C++', value: 100},
                 {label: 'OpenCV', value: 100},
                 {label: 'QT', value: 100},
-                {label: 'ROS', value: 50},
+                {label: 'ROS', value: 100},
                 {label: 'CMake', value: 100},
                 {label: 'Git', value: 100},
-                {label: 'ML', value: 50},
+                {label: 'ML', value: 100},
                 {label: 'Neural Networks', value: 100},
             ],
             industry: 'robotics',
@@ -539,6 +540,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'CSS', value: 100},
             ],
             industry: 'telecommunications',
+            breakPageAfter: true
         },
         {
             title: 'Full Stack Developer',
@@ -591,7 +593,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'SDK development', value: 100},
                 {label: 'Linux', value: 70},
                 {label: 'Apache', value: 70},
-                {label: 'MySQL', value: 50},
+                {label: 'MySQL', value: 100},
                 {label: 'PHP', value: 100},
                 {label: 'Pen Testing', value: 20},
                 {label: 'Jquery', value: 90},
@@ -660,7 +662,7 @@ export var workExperiences : ExperienceType[] =
                 {label: 'Bash', value: 30},
             ],
             industry: 'aeronautics',
-            breakPageAfter: true
+            breakPageAfter: false
         },
         {
             title: 'Freelance Teacher',
@@ -696,25 +698,25 @@ export var skills = {
 
     ],
     cloud: [
-        {label: 'AWS', value: 50, color: colors[0]},
-        {label: 'Linux', value: 50, color: colors[0]},
+        {label: 'AWS', value: 100, color: colors[0]},
+        {label: 'Linux', value: 100, color: colors[0]},
         {label: 'Jenkins', value: 25, color: colors[1]},
         {label: 'Gitlab CI', value: 25, color: colors[1]},
         {label: 'Azure', value: 10, color: colors[2]},
         {label: 'Terraform', value: 10, color: colors[2]},
-        {label: 'Kubernetes', value: 50, color: colors[0]},
-        {label: 'Ansible', value: 50, color: colors[0]},
+        {label: 'Kubernetes', value: 100, color: colors[0]},
+        {label: 'Ansible', value: 100, color: colors[0]},
     ],
     frameworks: [
-        {label: 'Angular', value: 50, color: colors[0]},
-        {label: 'Nest.js', value: 50, color: colors[0]},
+        {label: 'Angular', value: 100, color: colors[0]},
+        {label: 'Nest.js', value: 100, color: colors[0]},
         {label: 'Laravel', value: 15, color: colors[3]},
-        {label: 'flask', value: 50, color: colors[0]},
-        {label: 'Symfony', value: 50, color: colors[0]},
-        {label: 'Spring', value: 50, color: colors[0]},
-        {label: 'Next.js', value: 50, color: colors[0]},
-        {label: 'Vue.js', value: 50, color: colors[0]},
-        {label: 'Node.js', value: 50, color: colors[0]},
+        {label: 'flask', value: 100, color: colors[0]},
+        {label: 'Symfony', value: 100, color: colors[0]},
+        {label: 'Spring', value: 100, color: colors[0]},
+        {label: 'Next.js', value: 100, color: colors[0]},
+        {label: 'Vue.js', value: 100, color: colors[0]},
+        {label: 'Node.js', value: 100, color: colors[0]},
     ],
 }
 
@@ -768,3 +770,22 @@ export var industriesFromExperience: Array<SkillType> = workExperiences.reduce((
 
     return acc
 }, [])
+
+export const filteredExperiences = computed(() => {
+    // Get selected skills (keys where the value is true)
+    const selectedSkills = Object.keys(skillsState.selectedSkills).filter(
+        (key) => skillsState.selectedSkills[key]
+    );
+
+    // If no skills are selected, return all experiences
+    if (selectedSkills.length === 0) {
+        return workExperiences;
+    }
+
+    // Filter experiences based on selected skills
+    return workExperiences.filter((experience) =>
+        experience.skills.some((skill) =>
+            selectedSkills.includes(skill.label)
+        )
+    );
+});
