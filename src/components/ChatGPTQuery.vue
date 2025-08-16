@@ -104,7 +104,7 @@ const formatTime = (date: Date) => {
     <!-- Chat Interface -->
     <div
       v-if="showChat"
-      class="absolute top-12 left-1/2 transform -translate-x-1/2 w-[90vw] sm:w-[400px] md:w-[500px] lg:w-[600px] bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50"
+      class="absolute top-12 transform -translate-x-1/2 w-[90vw] sm:w-[400px] md:w-[500px] lg:w-[600px] bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50"
     >
       <!-- Chat Header -->
       <div class="bg-blue-600 text-white p-4 rounded-t-lg">
