@@ -37,7 +37,8 @@ scp dist.zip "$DOMAIN":~/
 # Update
 echo "Update app"
 
-ssh "$DOMAIN" "rm -rf ~/dist; unzip dist.zip; sudo cp -rf dist/* $DESTINATION_FOLDER"
+# Create .env file on server from environment variables
+ssh "$DOMAIN" "rm -rf ~/dist; unzip dist.zip; echo 'VITE_OPENAI_API_KEY=\$OPENAI_API_KEY' > dist/.env; sudo cp -rf dist/* $DESTINATION_FOLDER"
 
 # Clean up
 echo "Final Clean Up"

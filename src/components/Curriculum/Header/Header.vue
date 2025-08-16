@@ -5,6 +5,7 @@ import {
   PrinterIcon,
 } from "@heroicons/vue/24/solid";
 import IntroductionLetter from "./IntroductionLetter.vue";
+import ChatGPTQuery from "../../ChatGPTQuery.vue";
 import { useAttrs } from "vue";
 
 // Preserve ability to dynamically bind attributes
@@ -43,10 +44,13 @@ const attrs = useAttrs();
             >
             <span>LF-ynhdss52m7</span>
           </div>
-          <a href="jonathan_ruiz.pdf" class="print:hidden">
-            <PrinterIcon class="w-4 inline-block"></PrinterIcon>
-            PDF
-          </a>
+          <div class="flex justify-center items-center space-x-4 mb-2">
+            <a href="jonathan_ruiz.pdf" class="print:hidden">
+              <PrinterIcon class="w-4 inline-block"></PrinterIcon>
+              PDF
+            </a>
+            <ChatGPTQuery />
+          </div>
         </div>
 
         <!-- Introduction Section -->

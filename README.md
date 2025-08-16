@@ -66,6 +66,31 @@ The file `model.ts` defines:
 
 These aggregates power dynamic chart visualizations.
 
+## 🤖 ChatGPT Integration
+
+The project includes an AI-powered chat feature that allows visitors to ask questions about your experience and background.
+
+### Setup
+
+1. **Get an OpenAI API Key**: Visit [OpenAI Platform](https://platform.openai.com/api-keys) to create an API key
+2. **Configure Environment Variable**: Create a `.env` file in the project root with:
+   ```
+   VITE_OPENAI_API_KEY=your_openai_api_key_here
+   ```
+3. **Restart Development Server**: The chat will automatically use the real ChatGPT API once configured
+
+### Features
+
+- **Header Chat Button**: "Ask AI" button appears in the header next to the PDF link
+- **Context-Aware Responses**: The AI is trained on your specific background and experience
+- **Fallback Mode**: Works without API key (simulated responses)
+- **Print-Friendly**: Chat interface is hidden when printing
+- **Dark Mode Support**: Adapts to your site's theme
+
+### Customization
+
+The AI context is defined in `src/services/chatgpt.ts`. You can modify the `SYSTEM_CONTEXT` to provide different information about your background.
+
 ---
 
 Feel free to open a pull request if you'd like to improve or expand any part of this project!
