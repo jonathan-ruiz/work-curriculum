@@ -6,137 +6,10 @@ import {
 } from "@heroicons/vue/24/solid";
 import IntroductionLetter from "./IntroductionLetter.vue";
 import ChatGPTQuery from "../../ChatGPTQuery.vue";
-import { useAttrs, ref, onMounted, onUnmounted } from "vue";
+import { useAttrs } from "vue";
 
 // Preserve ability to dynamically bind attributes
 const attrs = useAttrs();
-
-// Character movement state
-const characterPosition = ref(0); // Horizontal position in pixels
-const isMovementEnabled = ref(false);
-
-// Movement constants
-const MOVE_STEP = 20; // Pixels per key press
-const MAX_LEFT = -100; // Maximum left position
-const MAX_RIGHT = 100; // Maximum right position
-
-// Handle keyboard events
-const handleKeydown = (event: KeyboardEvent) => {
-  if (!isMovementEnabled.value) return;
-  
-  switch (event.key) {
-    case 'ArrowLeft':
-      event.preventDefault();
-      characterPosition.value = Math.max(MAX_LEFT, characterPosition.value - MOVE_STEP);
-      break;
-    case 'ArrowRight':
-      event.preventDefault();
-      characterPosition.value = Math.min(MAX_RIGHT, characterPosition.value + MOVE_STEP);
-      break;
-  }
-};
-
-// Background movement when character hits limits
-const backgroundOffset = ref(0);
-const BACKGROUND_WIDTH = 400; // Width of one background segment
-
-// Move background when character hits limits
-const moveBackground = () => {
-  if (characterPosition.value <= MAX_LEFT && isMovingLeft.value) {
-    backgroundOffset.value += 2;
-  } else if (characterPosition.value >= MAX_RIGHT && isMovingRight.value) {
-    backgroundOffset.value -= 2;
-  }
-  
-  // Reset background position to create infinite loop
-  if (backgroundOffset.value >= BACKGROUND_WIDTH) {
-    backgroundOffset.value = 0;
-  } else if (backgroundOffset.value <= -BACKGROUND_WIDTH) {
-    backgroundOffset.value = 0;
-  }
-};
-
-// Track movement direction
-const isMovingLeft = ref(false);
-const isMovingRight = ref(false);
-
-const handleKeydownContinuous = (event: KeyboardEvent) => {
-  if (!isMovementEnabled.value) return;
-  
-  switch (event.key) {
-    case 'ArrowLeft':
-      event.preventDefault();
-      isMovingLeft.value = true;
-      break;
-    case 'ArrowRight':
-      event.preventDefault();
-      isMovingRight.value = true;
-      break;
-  }
-};
-
-const handleKeyupContinuous = (event: KeyboardEvent) => {
-  switch (event.key) {
-    case 'ArrowLeft':
-      isMovingLeft.value = false;
-      break;
-    case 'ArrowRight':
-      isMovingRight.value = false;
-      break;
-  }
-};
-
-// Animation loop
-let animationFrame: number;
-const animateBackground = () => {
-  moveBackground();
-  animationFrame = requestAnimationFrame(animateBackground);
-};
-
-const startBackgroundAnimation = () => {
-  if (isMovementEnabled.value) {
-    animationFrame = requestAnimationFrame(animateBackground);
-  }
-};
-
-const stopBackgroundAnimation = () => {
-  if (animationFrame) {
-    cancelAnimationFrame(animationFrame);
-  }
-};
-
-// Toggle movement with spacebar
-const handleKeyup = (event: KeyboardEvent) => {
-  if (event.code === 'Space') {
-    event.preventDefault();
-    isMovementEnabled.value = !isMovementEnabled.value;
-    
-    if (isMovementEnabled.value) {
-      startBackgroundAnimation();
-    } else {
-      stopBackgroundAnimation();
-      // Reset movement states
-      isMovingLeft.value = false;
-      isMovingRight.value = false;
-    }
-  }
-};
-
-// Lifecycle hooks
-onMounted(() => {
-  document.addEventListener('keydown', handleKeydown);
-  document.addEventListener('keydown', handleKeydownContinuous);
-  document.addEventListener('keyup', handleKeyup);
-  document.addEventListener('keyup', handleKeyupContinuous);
-});
-
-onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown);
-  document.removeEventListener('keydown', handleKeydownContinuous);
-  document.removeEventListener('keyup', handleKeyup);
-  document.removeEventListener('keyup', handleKeyupContinuous);
-  stopBackgroundAnimation();
-});
 </script>
 
 
@@ -146,75 +19,26 @@ onUnmounted(() => {
     <div
         class="lg:w-full group min-w-0 mt-20 break-words md:border rounded-md md:shadow-md"
     >
-      <!-- Profile Section -->
-      <div class="pb-6">
-        <!-- Profile Image with Animated Background -->
-        <div class="flex flex-wrap justify-center print:hidden">
-          <div class="flex justify-center w-full">
-            <div class="relative">
-              <!-- Animated Background -->
-              <div 
-                v-if="isMovementEnabled"
-                :style="{ transform: `translateX(${backgroundOffset}px)` }"
-                class="absolute inset-0 rounded-lg"
-                style="width: 800px; left: -200px;"
-              >
-                <!-- Background Segment 1 -->
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 dark:from-blue-900 dark:via-purple-900 dark:to-pink-900 rounded-lg" style="width: 400px;">
-                  <!-- Background Elements -->
-                  <div class="absolute top-4 left-10 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-pulse"></div>
-                  <div class="absolute top-8 right-20 w-6 h-6 bg-green-400 rounded-full opacity-50 animate-bounce"></div>
-                  <div class="absolute bottom-4 left-1/4 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-ping"></div>
-                  <div class="absolute bottom-8 right-1/3 w-5 h-5 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
-                  
-                  <!-- Moving Clouds -->
-                  <div class="absolute top-2 left-0 w-full h-4 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
-                  <div class="absolute top-6 right-0 w-full h-3 bg-gradient-to-l from-transparent via-white to-transparent opacity-20 animate-pulse"></div>
-                </div>
-                
-                <!-- Background Segment 2 (repeat) -->
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 dark:from-blue-900 dark:via-purple-900 dark:to-pink-900 rounded-lg" style="width: 400px; left: 400px;">
-                  <!-- Background Elements -->
-                  <div class="absolute top-4 left-10 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-pulse"></div>
-                  <div class="absolute top-8 right-20 w-6 h-6 bg-green-400 rounded-full opacity-50 animate-bounce"></div>
-                  <div class="absolute bottom-4 left-1/4 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-ping"></div>
-                  <div class="absolute bottom-8 right-1/3 w-5 h-5 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
-                  
-                  <!-- Moving Clouds -->
-                  <div class="absolute top-2 left-0 w-full h-4 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
-                  <div class="absolute top-6 right-0 w-full h-3 bg-gradient-to-l from-transparent via-white to-transparent opacity-20 animate-pulse"></div>
-                </div>
-              </div>
-              
-              <!-- Character -->
-              <img
-                  :style="{ transform: `translateX(${characterPosition}px)` }"
-                  src="../../../assets/images/profile-image.gif"
-                  class="align-middle border-0 absolute -m-12 -ml-18 lg:-ml-16 min-w-[120px] max-w-[300px] transition-transform duration-200 ease-in-out z-10"
-                  alt="Profile image of Jonathan Ruiz"
-              />
-              
-              <!-- Movement indicator -->
-              <div 
-                v-if="isMovementEnabled" 
-                class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse z-20"
-              >
-                🎮 Movement Active
+              <!-- Profile Section -->
+        <div class="pb-6">
+          <!-- Profile Image -->
+          <div class="flex flex-wrap justify-center print:hidden">
+            <div class="flex justify-center w-full">
+              <div class="relative">
+                <!-- Character -->
+                <img
+                    src="../../../assets/images/profile-image.gif"
+                    class="align-middle border-0 absolute -m-12 -ml-18 lg:-ml-16 min-w-[120px] max-w-[300px]"
+                    alt="Profile image of Jonathan Ruiz"
+                />
               </div>
             </div>
           </div>
-        </div>
 
         <!-- Name and Title -->
         <div class="mt-32 text-center">
           <h1>Jonathan Ruiz</h1>
           <h2 class="mb-1">Software Engineer</h2>
-          
-          <!-- Movement instructions -->
-          <div class="text-xs text-gray-500 dark:text-gray-400 mb-2 print:hidden">
-            <span v-if="!isMovementEnabled">Press <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">Space</kbd> to enable character movement</span>
-            <span v-else>Use <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">←</kbd> <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">→</kbd> to move, <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">Space</kbd> to disable</span>
-          </div>
           <div class="mb-2 text-sm">
             <a
                 href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/6d618e6f-2209-4c43-b209-460509f2600c-jonathan-ruiz-peinado-dc6d596c-6611-4253-bf8d-0c6ff8536fa8-certificate.pdf"
