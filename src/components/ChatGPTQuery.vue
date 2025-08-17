@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue';
 import { ChatBubbleLeftRightIcon, PaperAirplaneIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/solid';
-import chatGPTService from '../services/chatgpt';
+import { chatGPTService } from '../services/chatgpt';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -16,7 +16,10 @@ const showChat = ref(false);
 const inputDisabled = ref(false);
 
 // Make config status reactive
-const configStatus = computed(() => chatGPTService.getConfigurationStatus());
+const configStatus = computed(() => ({
+  configured: chatGPTService.isConfigured(),
+  message: chatGPTService.getConfigurationStatus()
+}));
 
 const sendQuery = async () => {
   if (!query.value.trim()) return;

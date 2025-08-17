@@ -72,6 +72,29 @@ The project includes an AI-powered chat feature that allows visitors to ask ques
 
 ### Setup
 
+#### Option 1: Backend Proxy (Recommended - Secure)
+
+1. **Setup the backend proxy:**
+   ```bash
+   cd server
+   ./setup.sh
+   ```
+
+2. **Configure your API key:**
+   - Edit `server/.env` file
+   - Add your OpenAI API key: `OPENAI_API_KEY=your_api_key_here`
+
+3. **Start the backend server:**
+   ```bash
+   cd server
+   npm run dev
+   ```
+
+4. **Configure the frontend:**
+   - Add `VITE_BACKEND_URL=http://localhost:3001` to your `.env` file
+
+#### Option 2: Direct API (Less Secure - Legacy)
+
 1. **Get an OpenAI API Key**: Visit [OpenAI Platform](https://platform.openai.com/api-keys) to create an API key
 2. **Configure Environment Variable**: Create a `.env` file in the project root with:
    ```
@@ -83,13 +106,23 @@ The project includes an AI-powered chat feature that allows visitors to ask ques
 
 - **Header Chat Button**: "Ask AI" button appears in the header next to the PDF link
 - **Context-Aware Responses**: The AI is trained on your specific background and experience
+- **Secure Backend Proxy**: API key never leaves the server (Option 1)
+- **Rate Limiting**: Prevents abuse and controls costs
 - **Fallback Mode**: Works without API key (simulated responses)
 - **Print-Friendly**: Chat interface is hidden when printing
 - **Dark Mode Support**: Adapts to your site's theme
 
+### Security
+
+The backend proxy provides several security benefits:
+- 🔒 API key is never exposed to the client
+- 🚦 Rate limiting prevents abuse
+- 🌍 CORS protection
+- 🛡️ Input validation and error handling
+
 ### Customization
 
-The AI context is defined in `src/services/chatgpt.ts`. You can modify the `SYSTEM_CONTEXT` to provide different information about your background.
+The AI context is defined in `server/server.js` (Option 1) or `src/services/chatgpt.ts` (Option 2). You can modify the system prompt to provide different information about your background.
 
 ---
 
