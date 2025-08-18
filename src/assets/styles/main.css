@@ -211,5 +211,5 @@ section {
 }
 
 .screen-skill {
-    @apply badge;
+    /* Remove background styling - let individual skill buttons handle their own styling */
 }

@@ -1,17 +1,16 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 
-// Global styles
-import './style.css'
+// Import global styles
+import '@/assets/styles/main.css'
 
-// Optional: Global plugins, e.g., router, pinia, etc.
-// import router from './router'
-// import store from './store'
-
+// Create app instance
 const app = createApp(App)
 
-// Register global plugins here
-// app.use(router)
-// app.use(store)
+// Install Pinia
+const pinia = createPinia()
+app.use(pinia)
 
+// Mount app
 app.mount('#app')

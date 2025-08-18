@@ -2,9 +2,9 @@
 export interface Props {
   themeClass?: string,
 }
-const props = withDefaults(defineProps<Props>(), {
-  themeClass: '',
-})
+// const props = withDefaults(defineProps<Props>(), {
+//   themeClass: '',
+// })
 
 const DEFAULT_COLOR = 'bg-blue-950 dark:bg-gray-100 text-white dark:text-black';
 </script>

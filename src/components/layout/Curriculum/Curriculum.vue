@@ -16,7 +16,7 @@ const attrs = useAttrs();
 </script>
 
 <template>
-  <div v-bind="attrs">
+  <div v-bind="attrs" class="rounded-lg shadow-lg p-6">
     <!-- Header section -->
     <Header
         :class="headerClass || 'text-center mx-2'"
@@ -24,7 +24,7 @@ const attrs = useAttrs();
 
     <!-- Body section -->
     <Body
-        :class="bodyClass || 'bg-white dark:bg-inherit mt-2'"
+        :class="bodyClass || 'mt-2'"
         :section-class="bodySectionClass || 'text-center'"
     />
   </div>

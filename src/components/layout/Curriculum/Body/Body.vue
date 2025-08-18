@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, useAttrs } from "vue";
-import { skills, skillsFromExperience, filteredExperiences } from "../../../model.ts";
-import { IndustryType } from "../../../types.ts";
+import { usePortfolioStore } from "@/stores/portfolio";
+import { useSkillsState } from "@/composables/useSkillsState";
+import type { IndustryType } from "@/types";
 import ExperienceList from "./ExperienceList.vue";
 import Skills from "../Skills.vue";
 import MainSkills from "./MainSkills.vue";
-import {skillsState} from "../../../useSkillsState.ts";
 
 // Props definition
 export interface Props {
@@ -14,6 +14,10 @@ export interface Props {
 
 const { sectionClass } = defineProps<Props>();
 const attrs = useAttrs();
+
+// Use the new store and composables
+const portfolioStore = usePortfolioStore();
+const { selectedSkills, filteredExperiences } = useSkillsState();
 
 // State for selected industries for filtering (if filter is enabled)
 const selectedIndustries = ref<IndustryType[]>([]);
@@ -30,12 +34,13 @@ const filteredWorkExperiences = computed(() => {
 
 // Computed for "Other Skills"
 const otherSkills = computed(() => {
+  const allSkills = portfolioStore.allSkills;
   const excludedSkills = [
-    ...skills.coding.map((s) => s.label),
-    ...skills.cloud.map((s) => s.label),
-    ...skills.frameworks.map((s) => s.label),
+    'JavaScript', 'TypeScript', 'Python', 'C#', 'Java', 'PHP', 'SQL',
+    'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform',
+    'React', 'Vue', 'Angular', 'Node.js', 'Express'
   ];
-  return skillsFromExperience
+  return allSkills
       .map((s) => s.label)
       .filter((sl) => !excludedSkills.includes(sl));
 });
@@ -45,19 +50,15 @@ const otherSkills = computed(() => {
  */
 const clearFilters = () => {
   selectedIndustries.value = []; // Clear selected industries
-
-  // Clear selected skills in skillsState
-  Object.keys(skillsState.selectedSkills).forEach((key) => {
-    skillsState.selectedSkills[key] = false; // Reset to unselected state
-  });
+  portfolioStore.clearSkills(); // Clear selected skills
 };
 
 /**
  * Computed property to determine if any skill is selected.
- * Returns true if at least one skill in `skillsState.selectedSkills` is set to true.
+ * Returns true if at least one skill is selected.
  */
 const hasSelectedSkills = computed(() => {
-  return Object.values(skillsState.selectedSkills).some((isSelected) => isSelected);
+  return selectedSkills.value.length > 0;
 });
 </script>
 

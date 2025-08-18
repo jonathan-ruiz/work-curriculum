@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Experience from "./Experience.vue";
-import { ExperienceType } from "../../../types.ts";
+import type { ExperienceType } from "@/types";
 import { useAttrs, computed } from "vue";
 
 // Define props with optional itemsClass and required experiences

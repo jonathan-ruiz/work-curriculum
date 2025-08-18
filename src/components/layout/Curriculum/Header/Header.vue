@@ -5,7 +5,7 @@ import {
   PrinterIcon,
 } from "@heroicons/vue/24/solid";
 import IntroductionLetter from "./IntroductionLetter.vue";
-import ChatGPTQuery from "../../ChatGPTQuery.vue";
+import ChatGPTQuery from "../../../features/ChatGPTQuery.vue";
 import { useAttrs } from "vue";
 
 // Preserve ability to dynamically bind attributes
@@ -27,7 +27,7 @@ const attrs = useAttrs();
               <div class="relative">
                 <!-- Character -->
                 <img
-                    src="../../../assets/images/profile-image.gif"
+                    src="@/assets/images/profile-image.gif"
                     class="align-middle border-0 absolute -m-12 -ml-18 lg:-ml-16 min-w-[120px] max-w-[300px]"
                     alt="Profile image of Jonathan Ruiz"
                 />

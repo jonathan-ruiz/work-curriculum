@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import Skills from "../Skills.vue";
 import Highlighter from "vue-highlight-words";
-import { ExperienceType, SkillType } from "../../../types.ts";
-import { computed, ref, useAttrs } from "vue";
-import IndustryIcon from "../../IndustryIcon.vue";
+import type { ExperienceType, SkillType } from "@/types";
+import { computed, useAttrs } from "vue";
+import type { IndustryType } from "@/types";
+import IndustryIcon from "../../../ui/IndustryIcon.vue";
 
 /**
  * Props definition
@@ -62,7 +63,7 @@ const formattedDuration = computed(() => {
   return `${startDate} - ${endDate} (${durationText})`;
 });
 
-const showMore = ref(false);
+// const showMore = ref(false); // Removed unused variable
 </script>
 
 <template>
@@ -96,7 +97,7 @@ const showMore = ref(false);
       <!-- Industry Icon -->
       <IndustryIcon
           v-if="experience.industry"
-          :name="experience.industry"
+          :name="experience.industry as IndustryType"
           class="hidden print:block md:block absolute top-0 left-0 -ml-3 h-5 w-5"
       />
 

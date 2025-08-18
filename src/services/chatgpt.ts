@@ -1,106 +1,178 @@
-import { workExperiences } from '../model';
+import { API_ENDPOINTS, API_CONFIG } from '@/constants'
+import type { ChatResponse } from '@/types'
 
-interface ChatMessage {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
+interface ChatRequest {
+  message: string
 }
 
-interface ChatGPTResponse {
-  response: string;
-  usage?: {
-    prompt_tokens: number;
-    completion_tokens: number;
-    total_tokens: number;
-  };
-}
+class ChatGPTService {
+  private responseCache = new Map<string, { response: string; timestamp: number }>()
+  private lastRequestTime = 0
 
-// Backend proxy configuration
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
-
-export class ChatGPTService {
-  private static instance: ChatGPTService;
-  private responseCache: Map<string, { response: string; timestamp: number }> = new Map();
-  private lastRequestTime: number = 0;
-  private readonly CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
-  private readonly RATE_LIMIT_DELAY = 2000; // 2 seconds between requests
-
-  private constructor() {}
-
-  public static getInstance(): ChatGPTService {
-    if (!ChatGPTService.instance) {
-      ChatGPTService.instance = new ChatGPTService();
-    }
-    return ChatGPTService.instance;
-  }
-
-  public async sendMessage(userMessage: string): Promise<string> {
+  /**
+   * Send a message to the ChatGPT API
+   */
+  async sendMessage(message: string): Promise<string> {
     try {
-      // Check if we have a cached response
-      const cacheKey = userMessage.toLowerCase().trim();
-      const cached = this.responseCache.get(cacheKey);
-      if (cached && Date.now() - cached.timestamp < this.CACHE_DURATION) {
-        console.log('Using cached response');
-        return cached.response;
+      // Check cache first
+      const cacheKey = this.generateCacheKey(message)
+      const cachedResponse = this.getCachedResponse(cacheKey)
+      if (cachedResponse) {
+        return cachedResponse
       }
 
       // Rate limiting
-      const now = Date.now();
-      if (now - this.lastRequestTime < this.RATE_LIMIT_DELAY) {
-        const delay = this.RATE_LIMIT_DELAY - (now - this.lastRequestTime);
-        await new Promise(resolve => setTimeout(resolve, delay));
-      }
+      await this.enforceRateLimit()
 
-      // Make request to backend proxy
-      const response = await fetch(`/api/chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userMessage })
-      });
+      // Make API request
+      const response = await this.makeApiRequest(message)
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        
-        if (response.status === 429) {
-          throw new Error(`Rate limit exceeded. Please wait ${errorData.retryAfter || 60} seconds before trying again.`);
-        }
-        
-        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data: ChatGPTResponse = await response.json();
-      
       // Cache the response
-      this.responseCache.set(cacheKey, {
-        response: data.response,
-        timestamp: Date.now()
-      });
+      this.cacheResponse(cacheKey, response)
 
-      this.lastRequestTime = Date.now();
-      return data.response;
-
+      return response
     } catch (error) {
-      console.error('Error calling ChatGPT service:', error);
-      throw error;
+      console.error('Error in ChatGPT service:', error)
+      throw new Error(this.getErrorMessage(error))
     }
   }
 
-  public isConfigured(): boolean {
-    return true; // Backend proxy handles configuration
+  /**
+   * Check if the service is properly configured
+   */
+  isConfigured(): boolean {
+    return true // Backend handles configuration
   }
 
-  public getConfigurationStatus(): string {
-    return 'Backend proxy configured';
+  /**
+   * Get configuration status message
+   */
+  getConfigurationStatus(): string {
+    return 'Backend proxy configured'
   }
 
-  public clearCache(): void {
-    this.responseCache.clear();
+  /**
+   * Generate cache key for a message
+   */
+  private generateCacheKey(message: string): string {
+    return btoa(message.toLowerCase().trim())
   }
 
-  public getCacheSize(): number {
-    return this.responseCache.size;
+  /**
+   * Get cached response if available and not expired
+   */
+  private getCachedResponse(cacheKey: string): string | null {
+    const cached = this.responseCache.get(cacheKey)
+    if (!cached) return null
+
+    const isExpired = Date.now() - cached.timestamp > API_CONFIG.CACHE_DURATION
+    if (isExpired) {
+      this.responseCache.delete(cacheKey)
+      return null
+    }
+
+    return cached.response
+  }
+
+  /**
+   * Cache a response
+   */
+  private cacheResponse(cacheKey: string, response: string): void {
+    this.responseCache.set(cacheKey, {
+      response,
+      timestamp: Date.now()
+    })
+  }
+
+  /**
+   * Enforce rate limiting between requests
+   */
+  private async enforceRateLimit(): Promise<void> {
+    const now = Date.now()
+    const timeSinceLastRequest = now - this.lastRequestTime
+    
+    if (timeSinceLastRequest < 1000) { // 1 second minimum between requests
+      await new Promise(resolve => setTimeout(resolve, 1000 - timeSinceLastRequest))
+    }
+    
+    this.lastRequestTime = Date.now()
+  }
+
+  /**
+   * Make the actual API request
+   */
+  private async makeApiRequest(message: string): Promise<string> {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.TIMEOUT)
+
+    try {
+      const response = await fetch(API_ENDPOINTS.CHAT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message } as ChatRequest),
+        signal: controller.signal
+      })
+
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      const data: ChatResponse = await response.json()
+      
+      if (data.error) {
+        throw new Error(data.error)
+      }
+
+      return data.message
+    } catch (error) {
+      clearTimeout(timeoutId)
+      throw error
+    }
+  }
+
+  /**
+   * Get user-friendly error message
+   */
+  private getErrorMessage(error: any): string {
+    if (error.name === 'AbortError') {
+      return 'Request timed out. Please try again.'
+    }
+    
+    if (error.message.includes('Failed to fetch')) {
+      return 'Network error. Please check your connection and try again.'
+    }
+    
+    if (error.message.includes('HTTP 429')) {
+      return 'Too many requests. Please wait a moment and try again.'
+    }
+    
+    if (error.message.includes('HTTP 500')) {
+      return 'Server error. Please try again later.'
+    }
+    
+    return error.message || 'An unexpected error occurred. Please try again.'
+  }
+
+  /**
+   * Clear the response cache
+   */
+  clearCache(): void {
+    this.responseCache.clear()
+  }
+
+  /**
+   * Get cache statistics
+   */
+  getCacheStats(): { size: number; entries: number } {
+    return {
+      size: this.responseCache.size,
+      entries: this.responseCache.size
+    }
   }
 }
 
-export const chatGPTService = ChatGPTService.getInstance();
+export const chatGPTService = new ChatGPTService()

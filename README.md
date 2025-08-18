@@ -1,129 +1,282 @@
-# Project Kickoff
+# Jonathan Ruiz Portfolio
 
-This project generates a printable, interactive curriculum using Vue 3 + TypeScript. It computes visual summaries from experience data, such as skill usage, industry presence, and roles over time.
+A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwind CSS. Features include an interactive CV, AI-powered chat interface, and professional presentation of work experience.
 
-## 🧰 Requirements
+## 🚀 Features
 
-- Node.js (v18+ recommended)  
-- NVM (optional, but recommended for version management)  
-- SSH access with public key to deploy (optional for deployment)
+- **Modern Tech Stack**: Vue 3 + TypeScript + Vite + Tailwind CSS
+- **AI Integration**: ChatGPT-powered chat interface for portfolio queries
+- **Responsive Design**: Mobile-first approach with print optimization
+- **Interactive Charts**: Visual representation of skills and experience
+- **State Management**: Pinia store for centralized data management
+- **Type Safety**: Full TypeScript implementation
+- **Performance**: Optimized builds with code splitting
 
-## 📦 Install Dependencies
+## 🏗️ Architecture
 
+```
+src/
+├── components/          # Vue components
+│   ├── ui/             # Reusable UI components
+│   ├── layout/         # Layout components
+│   └── features/       # Feature-specific components
+├── composables/        # Vue composables
+├── stores/            # Pinia stores
+├── services/          # API services
+├── utils/             # Utility functions
+├── types/             # TypeScript type definitions
+├── constants/         # Application constants
+├── data/              # Static data
+└── assets/            # Static assets
+```
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Vue 3, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **State Management**: Pinia
+- **Charts**: Chart.js + Vue-ChartJS
+- **Icons**: Heroicons
+- **AI**: OpenAI GPT-3.5-turbo (via backend proxy)
+- **Backend**: Node.js + Express.js
+- **Deployment**: Nginx + PM2
+
+## 📦 Installation
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm 9+
+
+### Frontend Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd work-curriculum
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-## 🚀 Development Server
+3. Create environment file:
+```bash
+cp .env.example .env
+```
 
-Launch the dev server:
-
+4. Start development server:
 ```bash
 npm run dev
 ```
 
-## 🏗️ Production Build
+### Backend Setup (Optional)
 
-Generate a production build:
+The AI chat feature requires a backend proxy for security. See [Backend Setup](#backend-setup) for details.
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Frontend
+VITE_BACKEND_URL=https://your-domain.com
+
+# Backend (server/.env)
+OPENAI_API_KEY=your-openai-api-key
+PORT=3001
+NODE_ENV=production
+```
+
+### ChatGPT Integration
+
+Two options for ChatGPT integration:
+
+#### Option 1: Backend Proxy (Recommended)
+- Secure API key handling
+- Rate limiting
+- Better error handling
+- See [Backend Setup](#backend-setup)
+
+#### Option 2: Client-side (Development only)
+- Direct API calls from frontend
+- API key exposed in client code
+- Not recommended for production
+
+## 🚀 Deployment
+
+### Frontend Deployment
 
 ```bash
+# Build for production
 npm run build
+
+# Deploy using provided script
+./deploy.sh user@server /path/to/web/root
 ```
 
-> ⚠️ Note: There was a typo in the original command: `buld` ➜ `build`.
-
-## 🚚 Deploy via SSH
-
-You can deploy the built files to a remote server via SSH.
-
-> This requires your public SSH key to be installed on the destination server.
+### Backend Deployment
 
 ```bash
-./deploy.sh [user]@domain.com /path/on/remote/server
+# Deploy backend
+./server/deploy.sh user@server /path/to/backend
 ```
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
-Key folders:
+### Components
 
-- `src/assets/fonts` — Embedded fonts  
-- `src/assets/images` — Curriculum-related visuals  
-- `src/components/Charts` — Pie, Radar, TopBar charts  
-- `src/components/Curriculum` — Printable CV views and icons  
-- `src/model.ts` — Main curriculum data model with experience, skills, industry, and role computation  
-- `src/types.ts` — Type definitions for experiences and skills  
-- `deploy.sh` — Custom SSH deployment script  
-- `tailwind.config.js` — Color palette used for skill heatmaps
+- **UI Components**: Reusable components like buttons, modals, charts
+- **Layout Components**: Page structure and navigation
+- **Feature Components**: Specific features like ChatGPT integration
 
-## 🧠 Curriculum Generation Logic
+### Data Management
 
-The file `model.ts` defines:
+- **Stores**: Pinia stores for state management
+- **Services**: API communication and external services
+- **Data**: Static portfolio data and configuration
 
-- `workExperiences[]` — A list of job entries with roles, skills, and impact  
-- `skillsFromExperience[]` — Aggregated skill scores based on time spent using each  
-- `rolesFromExperience[]` — Time-weighted role summaries  
-- `industriesFromExperience[]` — Time-weighted industry focus
+### Utilities
 
-These aggregates power dynamic chart visualizations.
+- **Date Utils**: Date formatting and calculations
+- **Validation**: Input validation and sanitization
+- **Constants**: Application-wide constants
 
-## 🤖 ChatGPT Integration
+## 🎨 Customization
 
-The project includes an AI-powered chat feature that allows visitors to ask questions about your experience and background.
+### Adding Work Experience
 
-### Setup
+Edit `src/data/portfolio.ts`:
 
-#### Option 1: Backend Proxy (Recommended - Secure)
+```typescript
+export const workExperiences: ExperienceType[] = [
+  {
+    id: 'unique-id',
+    title: 'Job Title',
+    role: ['Role1', 'Role2'],
+    company: 'Company Name',
+    startDate: new Date('2024-01-01'),
+    endDate: new Date('2024-12-31'),
+    achievements: ['Achievement 1', 'Achievement 2'],
+    tasks: ['Task 1', 'Task 2'],
+    skills: [
+      { label: 'Skill Name', value: 90 }
+    ],
+    industry: 'technology'
+  }
+]
+```
 
-1. **Setup the backend proxy:**
-   ```bash
-   cd server
-   ./setup.sh
-   ```
+### Styling
 
-2. **Configure your API key:**
-   - Edit `server/.env` file
-   - Add your OpenAI API key: `OPENAI_API_KEY=your_api_key_here`
+- **Tailwind CSS**: Utility-first CSS framework
+- **Custom CSS**: `src/assets/styles/main.css`
+- **Component Styles**: Scoped styles in Vue components
 
-3. **Start the backend server:**
-   ```bash
-   cd server
-   npm run dev
-   ```
+### Themes
 
-4. **Configure the frontend:**
-   - Add `VITE_BACKEND_URL=http://localhost:3001` to your `.env` file
+Modify `src/constants/index.ts` for theme customization:
 
-#### Option 2: Direct API (Less Secure - Legacy)
+```typescript
+export const THEME_COLORS = {
+  PRIMARY: '#3B82F6',
+  SECONDARY: '#64748B',
+  // ... more colors
+}
+```
 
-1. **Get an OpenAI API Key**: Visit [OpenAI Platform](https://platform.openai.com/api-keys) to create an API key
-2. **Configure Environment Variable**: Create a `.env` file in the project root with:
-   ```
-   VITE_OPENAI_API_KEY=your_openai_api_key_here
-   ```
-3. **Restart Development Server**: The chat will automatically use the real ChatGPT API once configured
+## 🔍 Development
 
-### Features
+### Available Scripts
 
-- **Header Chat Button**: "Ask AI" button appears in the header next to the PDF link
-- **Context-Aware Responses**: The AI is trained on your specific background and experience
-- **Secure Backend Proxy**: API key never leaves the server (Option 1)
-- **Rate Limiting**: Prevents abuse and controls costs
-- **Fallback Mode**: Works without API key (simulated responses)
-- **Print-Friendly**: Chat interface is hidden when printing
-- **Dark Mode Support**: Adapts to your site's theme
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run type-check   # TypeScript type checking
+npm run lint         # ESLint linting
+npm run format       # Prettier formatting
+npm run test         # Run tests
+```
 
-### Security
+### Code Quality
 
-The backend proxy provides several security benefits:
-- 🔒 API key is never exposed to the client
-- 🚦 Rate limiting prevents abuse
-- 🌍 CORS protection
-- 🛡️ Input validation and error handling
+- **ESLint**: Code linting with Vue 3 and TypeScript rules
+- **Prettier**: Code formatting
+- **TypeScript**: Static type checking
+- **Vue 3**: Composition API and script setup
 
-### Customization
+### Testing
 
-The AI context is defined in `server/server.js` (Option 1) or `src/services/chatgpt.ts` (Option 2). You can modify the system prompt to provide different information about your background.
+```bash
+# Run tests
+npm run test
 
----
+# Run tests with UI
+npm run test:ui
+```
 
-Feel free to open a pull request if you'd like to improve or expand any part of this project!
+## 🔒 Security
+
+### API Key Security
+
+- **Backend Proxy**: API keys stored securely on server
+- **Rate Limiting**: Prevents abuse
+- **CORS**: Configured for production domains
+- **Environment Variables**: Secure configuration management
+
+### Best Practices
+
+- Never commit API keys to version control
+- Use HTTPS in production
+- Implement proper error handling
+- Validate all user inputs
+
+## 📊 Performance
+
+### Optimization Features
+
+- **Code Splitting**: Automatic vendor chunk separation
+- **Tree Shaking**: Unused code elimination
+- **Image Optimization**: Optimized asset loading
+- **Caching**: API response caching
+- **Lazy Loading**: Component lazy loading
+
+### Build Optimization
+
+- **Vite**: Fast build tool
+- **TypeScript**: Compile-time optimizations
+- **Tailwind**: Purge unused CSS
+- **Source Maps**: Development debugging
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+
+- **Email**: contact@jonathanruiz.co.uk
+- **Issues**: Create an issue on GitHub
+- **Documentation**: Check the inline code comments
+
+## 🔄 Changelog
+
+### v1.0.0
+- Initial release
+- Vue 3 + TypeScript implementation
+- ChatGPT integration
+- Responsive design
+- Print optimization

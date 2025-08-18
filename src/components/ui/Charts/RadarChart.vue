@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import tailwindConfig from "../../../tailwind.config.js";
+// import tailwindConfig from "../../../tailwind.config.js"; // Removed unused import
 import {Chart as ChartJS, RadialLinearScale, Tooltip, Legend, PointElement, LineElement, Filler} from 'chart.js'
 import {Radar} from 'vue-chartjs'
 
