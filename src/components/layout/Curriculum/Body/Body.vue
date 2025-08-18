@@ -3,6 +3,7 @@ import { defineProps, ref, computed, useAttrs } from "vue";
 import { usePortfolioStore } from "@/stores/portfolio";
 import { useSkillsState } from "@/composables/useSkillsState";
 import type { IndustryType } from "@/types";
+import { additionalSkills } from "@/data/portfolio";
 import ExperienceList from "./ExperienceList.vue";
 import Skills from "../Skills.vue";
 import MainSkills from "./MainSkills.vue";
@@ -35,14 +36,24 @@ const filteredWorkExperiences = computed(() => {
 // Computed for "Other Skills"
 const otherSkills = computed(() => {
   const allSkills = portfolioStore.allSkills;
-  const excludedSkills = [
-    'JavaScript', 'TypeScript', 'Python', 'C#', 'Java', 'PHP', 'SQL',
-    'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform',
-    'React', 'Vue', 'Angular', 'Node.js', 'Express'
+  const mainSkillCategories = [
+    // Programming Languages (from MainSkills)
+    'JavaScript', 'TypeScript', 'Python', 'C#', 'Java', 'PHP', 'SQL', 'Bash', 'PowerShell', 'TDD',
+    // Cloud/DevOps (from MainSkills)  
+    'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'Gitlab CI', 'DataDog', 'Redis', 'PostgreSQL', 'Linux',
+    // Frameworks (from MainSkills)
+    'React', 'Vue', 'Angular', 'Node.js', 'Express', '.NET', 'Nest.js', 'Next.js', 'Unity', 'Unreal'
   ];
-  return allSkills
+  
+  // Get skills from work experiences that aren't in main categories
+  const workExperienceSkills = allSkills
       .map((s) => s.label)
-      .filter((sl) => !excludedSkills.includes(sl));
+      .filter((sl) => !mainSkillCategories.includes(sl));
+  
+  // Combine with additional comprehensive skills
+  const allOtherSkills = [...new Set([...workExperienceSkills, ...additionalSkills])];
+  
+  return allOtherSkills;
 });
 
 /**

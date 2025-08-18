@@ -644,6 +644,18 @@ export const personalInfo = {
   }
 }
 
+// Additional comprehensive skills list
+export const additionalSkills = [
+  'CSS', 'HTML', 'MaterialUI', 'Lens', 'Cucumber', 'Bitbucket', 'Inertia', 'Vite', 'MySQL', 'Tailwind', 
+  'JBoss', 'Qt', 'CMake', 'VirtualBox', 'Boost', 'Team Management', 'Firmware', 'SoC', 'Flask', 'NFC', 'GSM',
+  '6LowPan', 'IoT', 'Express.js', 'BLE', 'iOS', 'PWA', 'Webbluetooth', 'Bamboo', 'PHPUnit', 'PHING', 
+  'Nagios', 'Newrelic', 'Siege', 'Wordpress', 'Apache', 'MySQL Galera', 'Magento', 'Pen Testing',
+  'Puppet', 'Bootstrap', 'JQuery', 'Vagrant', 'Android', 'SAML', 'SourceSafe', 'SDK Development', 
+  'Drupal', 'OpenCV', 'ROS', 'ML', 'Neural Networks', 'VTK/ITK', 'DICOM', 'Swift', 'CodeIgniter', 
+  'Typo3', 'Subversion', 'ORACLE', 'ANSI C', 'AWK', 'Visual Basic 5.0', 'SAP', 'AIX', 'CATIA',
+  'Kibana', 'Nginx', 'Ansible', 'Vue.js', 'Node.js'
+]
+
 export const certifications = [
   {
     name: 'Certified Kubernetes Administrator (CKA)',
