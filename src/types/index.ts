@@ -77,8 +77,14 @@ export interface ChatMessage {
 }
 
 export interface ChatResponse {
-  message: string
+  response: string
+  message?: string
   error?: string
+  usage?: {
+    prompt_tokens: number
+    completion_tokens: number
+    total_tokens: number
+  }
 }
 
 // Utility types

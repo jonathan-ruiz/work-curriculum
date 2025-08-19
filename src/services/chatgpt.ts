@@ -1,5 +1,4 @@
 import { API_ENDPOINTS, API_CONFIG } from '@/constants'
-import type { ChatResponse } from '@/types'
 
 interface ChatRequest {
   message: string
@@ -121,13 +120,13 @@ class ChatGPTService {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
 
-      const data: ChatResponse = await response.json()
+      const data = await response.json()
       
       if (data.error) {
         throw new Error(data.error)
       }
 
-      return data.message
+      return data.response || data.message
     } catch (error) {
       clearTimeout(timeoutId)
       throw error
